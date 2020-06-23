@@ -3,8 +3,8 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y curl ffm
 
 RUN echo "+ Starting Imagemagic download and build" && \
     cd /usr/local/src && \
-    wget https://imagemagick.org/download/binaries/magick && \
-    tar -xvf ImageMagick*.tar.gz && cd ImageMagick* && \
+    wget ftp://ftp.imagemagick.org/pub/ImageMagick/ImageMagick.tar.gz && \
+    tar -xvf ImageMagick.tar.gz && cd ImageMagick* && \
     ./configure && make -j8 && make install && ldconfig
 
 
