@@ -1,0 +1,17 @@
+version: 2.1
+executors:
+  my-executor:
+    docker:
+     image: samip537/docker-with-buildx:latest
+jobs:
+  test-environment:
+    executor: my-executor
+    steps:
+      - checkout
+      - setup_remote_docker:
+          version: 19.03.8
+      - run: docker buildx version
+workflows:
+    testing-environment:
+      jobs:
+        - test-environment
