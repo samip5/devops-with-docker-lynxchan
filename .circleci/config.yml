@@ -29,7 +29,7 @@ jobs:
       #      command: cd docker && docker buildx build --platform linux/amd64 -t samip537/lynxchan:latest .
       - run:
            name: Build image for amd64
-           command: cd docker && ./build
+           command: cd docker && chmod +x build && ./build
   build-image-arm64:
     executor: my-executor-arm64
     environment:
@@ -53,7 +53,7 @@ jobs:
      #      command: sudo docker run --rm --privileged multiarch/qemu-user-static:amd64-arm64 --reset -p yes
       - run:
            name: Build image for arm64v7, arm64v8
-           command: cd docker && ./build
+           command: cd docker && chmod +x build && ./build
            
 workflows:
     build-image-and-deploy-amd64:
