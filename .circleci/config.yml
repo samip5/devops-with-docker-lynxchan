@@ -2,7 +2,7 @@ version: 2.1
 executors:
   my-executor:
     docker:
-     image: samip537/docker-with-buildx:latest
+     - image: samip537/docker-with-buildx:latest
 jobs:
   test-environment:
     executor: my-executor
