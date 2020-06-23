@@ -29,7 +29,7 @@ jobs:
       #      command: cd docker && docker buildx build --platform linux/amd64 -t samip537/lynxchan:latest .
       - run:
            name: Build image for amd64
-           command: docker build --build-arg ARCH=amd64 -t samip537/lynxchan -f Dockerfile .
+           command: docker build --build-arg ARCH=amd64 -t samip537/lynxchan -f docker/Dockerfile .
   build-image-arm64:
     executor: my-executor-arm64
     environment:
@@ -56,10 +56,10 @@ jobs:
      #      command: cd docker && chmod +x build && ./build
       - run:
            name: Build image for amd64v6
-           command: docker build --build-arg ARCH=arm64v6 -t samip537/lynxchan -f Dockerfile.arm64 .
+           command: docker build --build-arg ARCH=arm64v6 -t samip537/lynxchan -f docker/Dockerfile.arm64 .
       - run:
            name: Build image for amd64v6
-           command: docker build --build-arg ARCH=arm64v5 -t samip537/lynxchan -f Dockerfile.arm64 .
+           command: docker build --build-arg ARCH=arm64v5 -t samip537/lynxchan -f docker/Dockerfile.arm64 .
            
 workflows:
     build-image-and-deploy-amd64:
