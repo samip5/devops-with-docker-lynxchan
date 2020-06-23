@@ -1,4 +1,4 @@
-FROM arm64v6/node:14.3.0-stretch-slim
+FROM arm64v8/node:14.3.0-stretch-slim
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y curl ffmpeg wget unzip build-essential pkg-config libavformat-dev
 
 RUN echo "+ Starting Imagemagic download and build" && \
