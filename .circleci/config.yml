@@ -48,18 +48,18 @@ jobs:
      # - run:
      #       name: Build image for arm64 based systems
      #       command: cd docker && docker buildx build --platform linux/arm64v7,linux/arm64v8 -t samip537/lynxchan:latest .
-     # - run:
-     #      name: Prepare QEMU
-     #      command: sudo docker run --rm --privileged multiarch/qemu-user-static:amd64-arm64 --reset -p yes
+      - run:
+           name: Prepare QEMU
+           command: sudo docker run --rm --privileged multiarch/qemu-user-static:amd64-arm64 --reset -p yes
      # - run:
      #      name: Build image for arm64v7, arm64v8
      #      command: cd docker && chmod +x build && ./build
       - run:
-           name: Build image for amd32v6
-           command: docker build --build-arg ARCH=arm64v6 -t samip537/lynxchan -f docker/Dockerfile.arm32 .
+           name: Build image for arm32v7
+           command: docker build --build-arg ARCH=arm32v7 -t samip537/lynxchan -f docker/Dockerfile.arm32 .
       - run:
            name: Build image for amd64v8
-           command: docker build --build-arg ARCH=arm64v5 -t samip537/lynxchan -f docker/Dockerfile.arm64 .
+           command: docker build --build-arg ARCH=arm64v8 -t samip537/lynxchan -f docker/Dockerfile.arm64 .
            
 workflows:
     build-image-and-deploy-amd64:
