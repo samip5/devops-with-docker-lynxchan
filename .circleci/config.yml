@@ -12,7 +12,7 @@ executors:
 jobs:
   build-image-amd64:
     executor: my-executor
-    envrionment:
+    environment:
       - BUILD_ARCH=amd64
     steps:
       - checkout
