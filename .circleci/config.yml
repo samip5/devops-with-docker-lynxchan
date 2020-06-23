@@ -16,20 +16,20 @@ jobs:
       - BUILD_ARCH=amd64
     steps:
       - checkout
-      - run:
-           name: Check buildx version
-           command: docker buildx version
-      - run:
-           name: Create new builder & bootstrap it
-           command: |
-                  docker buildx create --use --name mybuilder --platform linux/amd64
-                  docker buildx inspect --bootstrap
-      - run:
-            name: Build image for amd64 based systems
-            command: cd docker && docker buildx build --platform linux/amd64 -t samip537/lynxchan:latest .
       #- run:
-      #     name: Build image for amd64
-      #     command: cd docker && ./build
+      #     name: Check buildx version
+      #     command: docker buildx version
+      #- run:
+      #     name: Create new builder & bootstrap it
+      #     command: |
+      #            docker buildx create --use --name mybuilder --platform linux/amd64
+      #            docker buildx inspect --bootstrap
+      #- run:
+      #      name: Build image for amd64 based systems
+      #      command: cd docker && docker buildx build --platform linux/amd64 -t samip537/lynxchan:latest .
+      - run:
+           name: Build image for amd64
+           command: cd docker && ./build
   build-image-arm64:
     executor: my-executor-arm64
     environment:
@@ -48,9 +48,9 @@ jobs:
       - run:
             name: Build image for arm64 based systems
             command: cd docker && docker buildx build --platform linux/arm64v7,linux/arm64v8 -t samip537/lynxchan:latest .
-      #- run:
-      #     name: Prepare QEMU
-      #     command: sudo docker run --rm --privileged multiarch/qemu-user-static:amd64-arm64 --reset -p yes
+      - run:
+           name: Prepare QEMU
+           command: sudo docker run --rm --privileged multiarch/qemu-user-static:amd64-arm64 --reset -p yes
      # - run:
      #      name: Build image for arm64v7, arm64v8
      #      command: cd docker && ./build
