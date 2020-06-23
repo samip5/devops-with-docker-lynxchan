@@ -50,7 +50,7 @@ jobs:
      #       command: cd docker && docker buildx build --platform linux/arm64v7,linux/arm64v8 -t samip537/lynxchan:latest .
       - run:
            name: Prepare QEMU
-           command: sudo docker run --rm --privileged multiarch/qemu-user-static:x86_64-armeb --reset -p yes
+           command: sudo docker run --rm --privileged multiarch/qemu-user-static:register --reset -p yes
      # - run:
      #      name: Build image for arm64v7, arm64v8
      #      command: cd docker && chmod +x build && ./build
