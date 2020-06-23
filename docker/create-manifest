@@ -1,0 +1,42 @@
+#!/bin/bash -ex
+
+DOCKER_ORG=samip537
+DOCKER_IMAGE=lynxchan
+
+TAGS="latest"
+
+for TAG in $TAGS
+do
+	docker manifest create --amend $DOCKER_ORG/$DOCKER_IMAGE:$TAG \
+	      $DOCKER_ORG/$DOCKER_IMAGE:arm32v5-$TAG \
+	      $DOCKER_ORG/$DOCKER_IMAGE:arm32v6-$TAG \
+	      $DOCKER_ORG/$DOCKER_IMAGE:arm32v7-$TAG
+	      $DOCKER_ORG/$DOCKER_IMAGE:arm64v7-$TAG \
+	      $DOCKER_ORG/$DOCKER_IMAGE:arm64v8-$TAG
+
+	docker manifest annotate $DOCKER_ORG/$DOCKER_IMAGE:$TAG \
+			$DOCKER_ORG/$DOCKER_IMAGE:amd64-$TAG \
+			--os linux --arch amd64
+
+	docker manifest annotate $DOCKER_ORG/$DOCKER_IMAGE:$TAG \
+                        $DOCKER_ORG/$DOCKER_IMAGE:arm32v5-$TAG \
+                        --os linux --arch arm --variant v5
+
+	docker manifest annotate $DOCKER_ORG/$DOCKER_IMAGE:$TAG \
+                        $DOCKER_ORG/$DOCKER_IMAGE:arm32v6-$TAG \
+                        --os linux --arch arm --variant v6
+
+	docker manifest annotate $DOCKER_ORG/$DOCKER_IMAGE:$TAG \
+			$DOCKER_ORG/$DOCKER_IMAGE:arm32v7-$TAG \
+			--os linux --arch arm --variant v7
+
+	docker manifest annotate $DOCKER_ORG/$DOCKER_IMAGE:$TAG \
+                        $DOCKER_ORG/$DOCKER_IMAGE:arm64v8-$TAG \
+                        --os linux --arch arm64 --variant v7
+
+	docker manifest annotate $DOCKER_ORG/$DOCKER_IMAGE:$TAG \
+			$DOCKER_ORG/$DOCKER_IMAGE:arm64v8-$TAG \
+			--os linux --arch arm64 --variant v8
+
+	docker manifest push $DOCKER_ORG/$DOCKER_IMAGE:$TAG
+done
